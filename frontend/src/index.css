@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+@layer components {
+  .btn {
+    @apply text-xs p-3 px-5 m-2 rounded-md text-white hover:rounded-2xl border-collapse border-white border;
+  }
+}
