@@ -19,7 +19,7 @@ function Kirim() {
     axios({
       method: "POST",
       url: `${env.VITE_API_URL}/pesan`,
-      data: {
+      params: {
         username: id,
         pesan: pesan,
         idpesan: idpesan,
