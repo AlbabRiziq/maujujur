@@ -9,6 +9,7 @@ configDotenv();
 const PORT = 8080 || process.env.PORT;
 
 const app = express();
+app.use(cors());
 const router = express.Router();
 
 app.use("/", router);
