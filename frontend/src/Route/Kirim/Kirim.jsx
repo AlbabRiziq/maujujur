@@ -1,15 +1,33 @@
 import { useParams } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 import { useEffect, useState } from "react";
+import axios from "axios";
+
+const env = import.meta.env;
 
 function Kirim() {
   const [pesan, setPesan] = useState();
 
   const id = useParams().id;
+  // Random string
 
-  useEffect(() => {
-    console.log(pesan);
-  }, [pesan]);
+  const submit = () => {
+    const idpesan = Math.random().toString(36).substring(9);
+
+    console.log(idpesan);
+
+    axios({
+      method: "POST",
+      url: `${env.VITE_API_URL}/pesan`,
+      data: {
+        username: id,
+        pesan: pesan,
+        idpesan: idpesan,
+      },
+    }).then((res) => {
+      console.log(res);
+    });
+  };
 
   // console.log(id);
   return (
@@ -33,8 +51,14 @@ function Kirim() {
             onChange={(e) => setPesan(e.target.value)}
           ></textarea>
           <br />
-          <button className="btn bg-[#427d9d]">KIRIM</button>
         </form>
+        <button
+          className="btn bg-[#427d9d] m-auto"
+          onClick={submit}
+          type="button"
+        >
+          KIRIM
+        </button>
       </div>
     </div>
   );

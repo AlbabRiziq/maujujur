@@ -1,13 +1,18 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 import Navbar from "../../Components/Navbar/Navbar";
+import ContextData from "../../Context/Context";
 
 function Daftar() {
   const [username, setUsername] = useState();
   const navigate = useNavigate();
   const dummyUser = ["Adi", "Ariyanto"];
+
+  const env = import.meta.env;
 
   useEffect(() => {
     const token = localStorage.getItem("user");
@@ -27,15 +32,37 @@ function Daftar() {
         type: "error",
         position: "top-center",
       });
-    } else {
-      localStorage.setItem("user", username);
-
-      window.location.href = "/";
-
-      toast("Username berhasil ditambahkan", {
-        type: "success",
+    } else if (username.includes(" ")) {
+      toast("Username tidak boleh ada spasi", {
+        type: "error",
         position: "top-center",
       });
+    } else {
+      axios({
+        method: "POST",
+        url: `${env.VITE_API_URL}/daftar`,
+        params: {
+          username: username,
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          localStorage.setItem("user", username);
+
+          window.location.href = "/";
+
+          toast("Username berhasil ditambahkan", {
+            type: "success",
+            position: "top-center",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          toast("Username gagal ditambahkan", {
+            type: "error",
+            position: "top-center",
+          });
+        });
     }
   };
   return (
