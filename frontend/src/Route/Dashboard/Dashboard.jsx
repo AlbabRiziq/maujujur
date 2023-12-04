@@ -5,11 +5,12 @@ import Navbar from "../../Components/Navbar/Navbar";
 
 function Dashboard() {
   const navigate = useNavigate();
+
   const [url] = useState("www.exaple.com/albrzq");
 
   const copyClipboard = (e) => {
     navigator.clipboard.writeText(e);
-    console.log(e);
+    // console.log(e);
   };
 
   return (

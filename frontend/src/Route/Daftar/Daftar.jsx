@@ -1,42 +1,18 @@
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../../Components/Navbar/Navbar";
 
 function Daftar() {
   const [username, setUsername] = useState();
-  // Buat array variabel dummy user yang 50 nama orang random
-  const dummyUser = [
-    "Adi",
-    "Adit",
-    "Aditya",
-    "Aji",
-    "Akbar",
-    "Aldi",
-    "Aldo",
-    "Aldy",
-    "Alex",
-    "Alfian",
-    "Alif",
-    "Alvin",
-    "Ardi",
-    "Ardian",
-    "Ardiyan",
-    "Arief",
-    "Arif",
-    "Arifin",
-    "Aris",
-    "Arjun",
-    "Ari",
-    "Aris",
-    "Ariyanto",
-  ];
+  const navigate = useNavigate();
+  const dummyUser = ["Adi", "Ariyanto"];
 
   useEffect(() => {
     const token = localStorage.getItem("user");
     if (token) {
-      window.location.href = "/";
+      navigate("/");
     }
   });
 
@@ -70,7 +46,7 @@ function Daftar() {
         <form className="text-center">
           <input
             type="text"
-            className="bg-[#9BBEC8] py-2 px-3"
+            className="bg-[#9BBEC8] py-3 px-9 rounded-xl"
             onChange={(e) => setUsername(e.target.value)}
           />
           <br />

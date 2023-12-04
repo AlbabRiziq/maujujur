@@ -1,11 +1,20 @@
 /* eslint-disable react/jsx-key */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../../Components/Navbar/Navbar";
+import { useNavigate } from "react-router-dom";
 
 function Pesan() {
   const [detailPesan, setDetailPesan] = useState(false);
   const [idPesan, setIdPesan] = useState(0);
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("user");
+    if (!token) {
+      navigate("/login");
+    }
+  });
   const pesan = [
     {
       id: 0,
@@ -31,7 +40,7 @@ function Pesan() {
       <br />
       <br />
       {!detailPesan ? (
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-wrap items-center justify-center">
           {pesan.map((pesan) => (
             <div className="bg-[#427D9D] p-3 m-3 rounded-lg text-center flex items-center">
               <p className="text-white">{pesan.pesan.slice(0, 5)}....</p>
