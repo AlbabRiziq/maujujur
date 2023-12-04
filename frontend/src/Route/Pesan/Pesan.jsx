@@ -26,6 +26,7 @@ function Pesan() {
       },
     }).then((res) => {
       setMessage(res.data[0].pesan);
+      console.log(res.data[0].pesan);
     });
   }, [username]);
 
@@ -34,16 +35,12 @@ function Pesan() {
     if (!token) {
       navigate("/login");
     }
-
-    console.log(context);
-
-    console.log(message);
   });
   const pesan = message;
 
   const lihatPesan = (id) => {
     setDetailPesan(true);
-    console.log(detailPesan);
+    console.log(id);
     setIdPesan(id);
   };
 
@@ -57,7 +54,7 @@ function Pesan() {
         <div className="flex flex-wrap items-center justify-center">
           {pesan.map((pesan) => (
             <div className="bg-[#427D9D] p-3 m-3 rounded-lg text-center flex items-center">
-              <p className="text-white">{pesan.slice(0, 5)}....</p>
+              <p className="text-white">{pesan.pesan.slice(0, 5)}....</p>
               <button
                 className="btn bg-[#427D9D] mx-5"
                 onClick={() => lihatPesan(pesan)}
@@ -70,7 +67,7 @@ function Pesan() {
       ) : (
         <div>
           <div className="text-sm p-5 mx-2 text-white rounded-xl bg-[#427D9D] text-center">
-            <p>{pesan[idPesan]}</p>
+            <p>{idPesan.pesan}</p>
           </div>
 
           {/* Tombol kembali */}
