@@ -7,7 +7,7 @@ configDotenv();
 const router = express.Router();
 
 mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017");
-mongoose.router.post("/pesan", async (req, res, next) => {
+router.post("/pesan", async (req, res, next) => {
   console.log("tes");
   const username = req.query.username;
   const pesan = req.query.pesan;
