@@ -32,11 +32,6 @@ function Daftar() {
         type: "error",
         position: "top-center",
       });
-    } else if (username.includes(" ")) {
-      toast("Username tidak boleh ada spasi", {
-        type: "error",
-        position: "top-center",
-      });
     } else {
       axios({
         method: "POST",

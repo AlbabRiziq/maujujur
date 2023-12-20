@@ -1,6 +1,7 @@
 import express from "express";
 import { configDotenv } from "dotenv";
 import cors from "cors";
+import mongoose from "mongoose";
 
 import daftar from "./Routers/daftar.js";
 import pesan from "./Routers/pesan.js";
@@ -11,6 +12,8 @@ const PORT = 8080 || process.env.PORT;
 const app = express();
 app.use(cors());
 const router = express.Router();
+
+mongoose.connect(process.env.MONGO_URI);
 
 app.use("/", router);
 

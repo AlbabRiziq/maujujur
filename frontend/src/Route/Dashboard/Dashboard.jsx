@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import JumlahPesan from "../../Components/JumlahPesan/JumlahPesan";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
@@ -14,7 +14,7 @@ function Dashboard() {
   const [message, setMessage] = useState([]);
 
   const [url] = useState(
-    `${location.protocol}://${location.host}/pesan/${username}`
+    `${location.protocol}//${location.host}/pesan/${username}`
   );
 
   useEffect(() => {

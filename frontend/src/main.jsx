@@ -7,6 +7,7 @@ import Daftar from "./Route/Daftar/Daftar.jsx";
 import Pesan from "./Route/Pesan/Pesan.jsx";
 import Kirim from "./Route/Kirim/Kirim.jsx";
 import ContextData from "./Context/Context.jsx";
+import View from "./Route/Kirim/View.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/login" element={<Daftar />} />
           <Route path="/pesan" element={<Pesan />} />
           <Route path="/pesan/:id" element={<Kirim />} />
+          <Route path="/pesan/:id/:idpesan" element={<View />} />
         </Routes>
       </BrowserRouter>
     </ContextData.Provider>
