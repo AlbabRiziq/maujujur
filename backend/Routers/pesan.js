@@ -21,6 +21,7 @@ router.post("/pesan", async (req, res, next) => {
         pesan: {
           idpesan: idpesan,
           pesan: pesan,
+          komentar: [],
         },
       },
     }

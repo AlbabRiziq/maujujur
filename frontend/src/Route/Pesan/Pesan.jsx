@@ -1,8 +1,7 @@
 /* eslint-disable react/jsx-key */
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../../Components/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
-import ContextData from "../../Context/Context";
 import axios from "axios";
 
 const env = import.meta.env;
@@ -10,7 +9,6 @@ const env = import.meta.env;
 function Pesan() {
   const [detailPesan, setDetailPesan] = useState(false);
   const [idPesan, setIdPesan] = useState(0);
-  const context = useContext(ContextData);
   const navigate = useNavigate();
 
   const username = localStorage.getItem("user");
@@ -40,7 +38,7 @@ function Pesan() {
 
   const lihatPesan = (id) => {
     setDetailPesan(true);
-    console.log(id);
+    console.log(id.pesan);
     setIdPesan(id);
   };
 
@@ -54,10 +52,7 @@ function Pesan() {
         <div className="flex flex-wrap items-center justify-center">
           {pesan.map((pesan) => (
             <div className="bg-[#427D9D] p-3 m-3 rounded-lg text-center flex items-center flex-col">
-              <p className="text-white">
-                {pesan.pesan}
-                {console.log(pesan.pesan)}
-              </p>
+              <p className="text-white">{pesan.pesan}</p>
               <button
                 className="btn bg-[#427D9D] mx-5"
                 onClick={() => lihatPesan(pesan)}
@@ -69,13 +64,8 @@ function Pesan() {
         </div>
       ) : (
         <div className="flex items-center flex-col ">
-          <div className="text-sm p-5 mx-2 text-white rounded-xl bg-[#427D9D] text-center">
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta a
-              vero consequuntur culpa in fugiat iusto beatae illum. Quaerat
-              distinctio voluptas vitae perferendis doloribus autem impedit
-              aliquam totam facilis? Officia!
-            </p>
+          <div className="text-sm p-5 mx-2 text-white rounded-xl bg-[#427D9D] text-center w-screen ">
+            <p>{idPesan.pesan}</p>
           </div>
 
           {/* Tampilan komentar */}
