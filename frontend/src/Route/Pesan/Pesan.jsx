@@ -70,7 +70,7 @@ function Pesan() {
 
           {/* Tampilan komentar */}
 
-          <div className="flex w-screen p-5">
+          {/* <div className="flex w-screen p-5">
             <div className="bg-[#427d9d] text-white p-2 px-3 rounded-lg">
               <h1 className="text-sm mb-2 font-bold">ANONYMOUS</h1>
               <p className="text-xs">
@@ -78,7 +78,7 @@ function Pesan() {
                 Voluptates, recusandae.
               </p>
             </div>
-          </div>
+          </div> */}
 
           <form className="flex flex-col items-center">
             <textarea
