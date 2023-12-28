@@ -27,8 +27,8 @@ function Daftar() {
         type: "error",
         position: "top-center",
       });
-    } else if (dummyUser.includes(username)) {
-      toast("Username sudah ada", {
+    } else if (username == "user") {
+      toast("Username gagal ditambahkan", {
         type: "error",
         position: "top-center",
       });

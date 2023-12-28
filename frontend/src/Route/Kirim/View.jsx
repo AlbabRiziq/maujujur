@@ -1,6 +1,33 @@
+import { useParams } from "react-router-dom";
+
 import Navbar from "../../Components/Navbar/Navbar";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+const env = import.meta.env;
 
 function View() {
+  const idpesan = useParams().idpesan;
+  const user = useParams().id;
+  const [pesan, setPesan] = useState();
+  const [balasan, setBalasan] = useState([]);
+
+  console.log(idpesan);
+
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: `${env.VITE_API_URL}/viewpesan`,
+      params: {
+        idpesan: idpesan,
+        username: user,
+      },
+    }).then((res) => {
+      setPesan(res.data.pesan);
+      setBalasan(res.data.komentar);
+    });
+  }, [idpesan, user]);
+
   return (
     <div>
       <Navbar />
@@ -9,27 +36,23 @@ function View() {
       <br />
       <br />
       <div className="flex items-center flex-col ">
-        {/* <div className="text-sm p-5 mx-2 text-white rounded-xl bg-[#427D9D] text-center">
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta a
-            vero consequuntur culpa in fugiat iusto beatae illum. Quaerat
-            distinctio voluptas vitae perferendis doloribus autem impedit
-            aliquam totam facilis? Officia!
-          </p>
-        </div> */}
-
+        <div className="text-sm p-5 mx-2 text-white rounded-xl bg-[#427D9D] text-center">
+          <p>{pesan}</p>
+        </div>{" "}
         {/* Tampilan komentar */}
-        {/* 
-        <div className="flex w-screen p-5">
-          <div className="bg-[#427d9d] text-white p-2 px-3 rounded-lg">
-            <h1 className="text-sm mb-2 font-bold">ANONYMOUS</h1>
-            <p className="text-xs">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Voluptates, recusandae.
-            </p>
+        <div className="flex w-screen p-5 flex-col">
+          <div className="">
+            <p className="">BALASAN</p>
           </div>
-        </div> */}
-
+          {balasan.map((balasan, index) => (
+            <div
+              key={index}
+              className="bg-[#427D9D] p-3 m-3 rounded-lg text-center flex items-center flex-col"
+            >
+              <p className="text-white">{balasan.komen}</p>
+            </div>
+          ))}
+        </div>
         <form className="flex flex-col items-center">
           <textarea
             name=""
@@ -41,14 +64,12 @@ function View() {
           <br />
           <button className="btn bg-[#427d9d] m-auto">KIRIM</button>
         </form>
-
         <button
           className="btn bg-slate-700 mt-3 m-auto"
           onClick={() => history.back()}
         >
           KEMBALI
         </button>
-
         {/* Tombol kembali */}
       </div>
     </div>

@@ -6,8 +6,6 @@ configDotenv();
 
 const router = express.Router();
 
-mongoose.connect(process.env.MONGO_URI);
-
 router.post("/pesan", async (req, res, next) => {
   console.log("tes");
   const username = req.query.username;
@@ -40,6 +38,21 @@ router.get("/pesan", async (req, res, next) => {
   const result = User.find({ username: username });
 
   res.send(await result);
+});
+router.get("/viewpesan", async (req, res, next) => {
+  const username = req.query.username;
+  const idpesan = req.query.idpesan;
+
+  try {
+    const result = await User.find({
+      username: username,
+      "pesan.idpesan": idpesan,
+    });
+    res.send(result[0].pesan.find((pesan) => pesan.idpesan == idpesan));
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: "Terjadi kesalahan" });
+  }
 });
 
 export default router;

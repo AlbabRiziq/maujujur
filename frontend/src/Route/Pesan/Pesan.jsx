@@ -9,11 +9,12 @@ const env = import.meta.env;
 function Pesan() {
   const [detailPesan, setDetailPesan] = useState(false);
   const [idPesan, setIdPesan] = useState(0);
+  const [message, setMessage] = useState([]);
+  const [komentar, setKomentar] = useState([]);
+
   const navigate = useNavigate();
 
   const username = localStorage.getItem("user");
-
-  const [message, setMessage] = useState([]);
 
   useEffect(() => {
     axios({
@@ -27,13 +28,18 @@ function Pesan() {
       console.log(res.data[0].pesan);
     });
   }, [username]);
-
+  //
   useEffect(() => {
     const token = localStorage.getItem("user");
     if (!token) {
       navigate("/login");
     }
   });
+
+  useEffect(() => {
+    console.log(komentar);
+  }, [komentar]);
+
   const pesan = message;
 
   const lihatPesan = (id) => {
@@ -87,6 +93,10 @@ function Pesan() {
               cols="50"
               rows="2"
               className="bg-slate-200 rounded-xl mt-5 p-5"
+              onChange={(e) => {
+                setKomentar(e.target.value);
+                console.log(komentar);
+              }}
             ></textarea>
             <br />
             <button className="btn bg-[#427d9d] m-auto">KIRIM</button>
