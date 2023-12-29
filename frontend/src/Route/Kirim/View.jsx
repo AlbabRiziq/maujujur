@@ -69,7 +69,7 @@ function View() {
         </div>{" "}
         {/* Tampilan komentar */}
         <div className="flex w-screen p-5 flex-col">
-          <div className="">
+          <div className="bg-slate-500 text-white p-4 w-32 text-center rounded-xl">
             <p className="">BALASAN</p>
           </div>
           {balasan.map((balasan, index) => (
