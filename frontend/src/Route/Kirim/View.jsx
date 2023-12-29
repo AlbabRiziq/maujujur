@@ -48,7 +48,8 @@ function View() {
           komen: komen,
         },
       }).then((res) => {
-        console.log(res.data);
+        alert("BERHASIL");
+        location.reload();
       });
 
       console.log(komen);
