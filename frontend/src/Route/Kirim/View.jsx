@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -7,12 +7,19 @@ import axios from "axios";
 const env = import.meta.env;
 
 function View() {
+  const navigate = useNavigate();
+
   const idpesan = useParams().idpesan;
   const user = useParams().id;
   const [pesan, setPesan] = useState();
   const [balasan, setBalasan] = useState([]);
+  const [komen, setKomen] = useState();
 
-  console.log(idpesan);
+  useEffect(() => {
+    if (!localStorage.getItem(user)) {
+      navigate("/login");
+    }
+  });
 
   useEffect(() => {
     axios({
@@ -27,6 +34,26 @@ function View() {
       setBalasan(res.data.komentar);
     });
   }, [idpesan, user]);
+
+  const commentHandle = () => {
+    if (komen == undefined || komen == null || komen == "") {
+      alert("Komentar tidak boleh kosong");
+    } else {
+      axios({
+        method: "POST",
+        url: `${env.VITE_API_URL}/komen`,
+        params: {
+          idpesan: idpesan,
+          username: user,
+          komen: komen,
+        },
+      }).then((res) => {
+        console.log(res.data);
+      });
+
+      console.log(komen);
+    }
+  };
 
   return (
     <div>
@@ -60,9 +87,16 @@ function View() {
             cols="50"
             rows="2"
             className="bg-slate-200 rounded-xl mt-5 p-5"
+            onChange={(e) => setKomen(e.target.value)}
           ></textarea>
           <br />
-          <button className="btn bg-[#427d9d] m-auto">KIRIM</button>
+          <button
+            className="btn bg-[#427d9d] m-auto"
+            type="button"
+            onClick={commentHandle}
+          >
+            KIRIM
+          </button>
         </form>
         <button
           className="btn bg-slate-700 mt-3 m-auto"

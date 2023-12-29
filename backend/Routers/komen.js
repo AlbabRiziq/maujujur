@@ -10,6 +10,10 @@ router.post("/komen", async (req, res, next) => {
   const idpesan = req.query.idpesan;
   const komen = req.query.komen;
 
+  console.log(username);
+  console.log(idpesan);
+  console.log(komen);
+
   const hasil = await User.updateOne(
     { username: username, "pesan.idpesan": idpesan },
     {

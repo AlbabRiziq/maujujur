@@ -36,10 +36,6 @@ function Pesan() {
     }
   });
 
-  useEffect(() => {
-    console.log(komentar);
-  }, [komentar]);
-
   const pesan = message;
 
   const lihatPesan = (id) => {
@@ -76,15 +72,14 @@ function Pesan() {
 
           {/* Tampilan komentar */}
 
-          {/* <div className="flex w-screen p-5">
-            <div className="bg-[#427d9d] text-white p-2 px-3 rounded-lg">
-              <h1 className="text-sm mb-2 font-bold">ANONYMOUS</h1>
+          <div className="flex flex-col w-screen p-5">
+            <div className="bg-[#427d9d] text-white p-2 px-3 rounded-lg w-96">
               <p className="text-xs">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Voluptates, recusandae.
               </p>
             </div>
-          </div> */}
+          </div>
 
           <form className="flex flex-col items-center">
             <textarea
@@ -111,11 +106,6 @@ function Pesan() {
           </button>
         </div>
       )}
-      <div className="flex items-center justify-center">
-        <button className="btn bg-slate-800" onClick={() => navigate("/")}>
-          HOME
-        </button>
-      </div>
     </div>
   );
 }
