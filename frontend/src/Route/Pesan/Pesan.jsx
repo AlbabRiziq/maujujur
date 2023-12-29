@@ -36,6 +36,29 @@ function Pesan() {
     }
   });
 
+  useEffect(() => {}, [idPesan]);
+  const commentHandle = () => {
+    if (komentar == undefined || komentar == null || komentar == "") {
+      alert("Komentar tidak boleh kosong");
+    } else {
+      axios({
+        method: "POST",
+        url: `${env.VITE_API_URL}/komen`,
+        params: {
+          idpesan: idPesan.idpesan,
+          username: username,
+          komen: komentar,
+        },
+      }).then((res) => {
+        alert("BERHASIL");
+        location.reload();
+      });
+
+      console.log(komentar);
+    }
+  };
+
+  console.log(idPesan);
   const pesan = message;
 
   const lihatPesan = (id) => {
@@ -72,13 +95,12 @@ function Pesan() {
 
           {/* Tampilan komentar */}
 
-          <div className="flex flex-col w-screen p-5">
-            <div className="bg-[#427d9d] text-white p-2 px-3 rounded-lg w-96">
-              <p className="text-xs">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptates, recusandae.
-              </p>
-            </div>
+          <div className="flex flex-col w-screen p-5 gap-3">
+            {idPesan.komentar.map((balasan) => (
+              <div className="bg-[#427d9d] text-white p-2 px-3 rounded-lg w-96">
+                <p className="text-xs">{balasan.komen}</p>
+              </div>
+            ))}
           </div>
 
           <form className="flex flex-col items-center">
@@ -90,11 +112,16 @@ function Pesan() {
               className="bg-slate-200 rounded-xl mt-5 p-5"
               onChange={(e) => {
                 setKomentar(e.target.value);
-                console.log(komentar);
               }}
             ></textarea>
             <br />
-            <button className="btn bg-[#427d9d] m-auto">KIRIM</button>
+            <button
+              className="btn bg-[#427d9d] m-auto"
+              onClick={commentHandle}
+              type="button"
+            >
+              KIRIM
+            </button>
           </form>
 
           {/* Tombol kembali */}
